@@ -1,40 +1,37 @@
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Animated Nav Menu</title>
+    <title>Social Statistics</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation Menu -->
     <nav class="navbar">
         <div class="nav-container">
-            <!-- Logo -->
             <div class="nav-logo">
-                <a href="#home">YourLogo</a>
+                <a href="#home">SocialStats</a>
             </div>
 
-            <!-- Desktop Menu -->
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="#home" class="nav-link active">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
+                    <a href="#stats" class="nav-link">Statistics</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#effects" class="nav-link">Effects</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#portfolio" class="nav-link">Portfolio</a>
+                    <a href="#habits" class="nav-link">Habits</a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link">Contact</a>
                 </li>
             </ul>
 
-            <!-- Mobile Menu Button -->
             <div class="hamburger" onclick="toggleMobileMenu()">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -42,45 +39,46 @@
             </div>
         </div>
     </nav>
-     <main>
-        <section id="home" class="section">Home Content</section>
-        <section id="about" class="section">About Content</section>
-        <section id="services" class="section">Services Content</section>
-        <section id="portfolio" class="section">Portfolio Content</section>
-        <section id="contact" class="section">Contact Content</section>
+
+    <!-- Main Content -->
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1>Social Statistics</h1>
+                <p>A website about the effects of social media and healthier digital habits.</p>
+                <p>Updated on March 31, 2026 to verify changes to code.</p>
+            </div>
+        </section>
+
+        <section id="stats" class="section">
+            <div class="container">
+                <h2>Social Media Statistics</h2>
+                <p>Key data points about social media usage and impact.</p>
+            </div>
+        </section>
+
+        <section id="effects" class="section alt-bg">
+            <div class="container">
+                <h2>Psychological Effects</h2>
+                <p>Understanding the mental health implications of excessive use.</p>
+            </div>
+        </section>
+
+        <section id="habits" class="section">
+            <div class="container">
+                <h2>Healthier Habits</h2>
+                <p>Practical strategies for better digital wellbeing.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="section alt-bg">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <p>Contact information and resources.</p>
+            </div>
+        </section>
     </main>
 
     <script src="script.js"></script>
-</body>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Social Statistics</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 40px 20px;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      background: #f5f7fa;
-      color: #222;
-    }
-
-    h1 {
-      margin-bottom: 12px;
-      color: #1f3b57;
-    }
-
-    p {
-      max-width: 700px;
-      margin-bottom: 12px;
-      color: #444;
-    }
-  </style>
-<body>
-  <h1>Social Statistics</h1>
-  <p>A website about the effects of social media and healthier digital habits.</p>
-  <p>Updated on March 31, 2026 to verify changes to code.</p>
 </body>
 </html>
