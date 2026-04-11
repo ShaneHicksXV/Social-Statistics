@@ -104,10 +104,6 @@ body {
   outline-offset: 3px;
 }
 
-.theme-toggle i {
-  font-size: 1rem;
-}
-
 .hero-section {
   padding: 72px 0;
   background: var(--hero-bg);
