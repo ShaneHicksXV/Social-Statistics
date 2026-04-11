@@ -3,8 +3,134 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Social Statistics</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f7fb;
+      --text: #111827;
+      --card: #ffffff;
+      --border: #d1d5db;
+      --accent: #2563eb;
+      --button-bg: #111827;
+      --button-text: #ffffff;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --hero-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --hero-text: #ffffff;
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0f172a;
+      --text: #e5e7eb;
+      --card: #111827;
+      --border: #334155;
+      --accent: #60a5fa;
+      --button-bg: #e5e7eb;
+      --button-text: #111827;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --hero-bg: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      --hero-text: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .container {
+      width: min(1200px, 92vw);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .topbar-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .brand a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: var(--button-bg);
+      color: var(--button-text);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      transition: transform 0.15s ease, background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .hero-section {
+      padding: 72px 0;
+      background: var(--hero-bg);
+      color: var(--hero-text);
+    }
+
+    .hero-card {
+      background: color-mix(in srgb, var(--card) 94%, transparent);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    .hero-card p {
+      margin: 0 0 14px;
+      max-width: 65ch;
+    }
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -14,7 +140,6 @@
       </div>
 
       <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
-        <i class="fa-solid fa-circle-half-stroke"></i>
         <span id="theme-text">Theme: Auto</span>
       </button>
     </div>
@@ -30,6 +155,42 @@
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    const root = document.documentElement;
+    const button = document.getElementById('theme-toggle');
+    const themeText = document.getElementById('theme-text');
+    const modes = ['auto', 'light', 'dark'];
+    let mode = localStorage.getItem('theme') || 'auto';
+
+    function systemTheme() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme() {
+      const activeTheme = mode === 'auto' ? systemTheme() : mode;
+      root.dataset.theme = activeTheme;
+      themeText.textContent = `Theme: ${mode.charAt(0).toUpperCase() + mode.slice(1)}`;
+      button.setAttribute('aria-pressed', mode !== 'auto');
+    }
+
+    button.addEventListener('click', () => {
+      mode = modes[(modes.indexOf(mode) + 1) % modes.length];
+      localStorage.setItem('theme', mode);
+      applyTheme();
+    });
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => {
+      if (mode === 'auto') applyTheme();
+    };
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleChange);
+    } else {
+      mediaQuery.addListener(handleChange);
+    }
+
+    applyTheme();
+  </script>
 </body>
 </html>
