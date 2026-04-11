@@ -1,21 +1,59 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Statistics</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Statistics</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
 </head>
-    <main>
-        <section id="home" class="hero-section">
-            <div class="container">
-                <h1>Social Statistics</h1>
-                <p>A website about the effects of social media and healthier digital habits.</p>
-                <p>Updated on March 31, 2026 to verify changes to code.</p>
-            </div>
-        </section>
-            </div>
-        </section>
-    </main>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">Social Statistics</div>
+      <button id="theme-toggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle theme">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+        <span id="theme-text">Theme: Auto</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero-section">
+      <div class="container hero-card">
+        <h1>Social Statistics</h1>
+        <p>A website about the effects of social media and healthier digital habits.</p>
+        <p>Updated on March 31, 2026 to verify changes to code.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+    const button = document.getElementById('theme-toggle');
+    const themeText = document.getElementById('theme-text');
+    const modes = ['auto', 'light', 'dark'];
+    let mode = localStorage.getItem('theme') || 'auto';
+
+    const systemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+    function applyTheme() {
+      const activeTheme = mode === 'auto' ? systemTheme() : mode;
+      root.dataset.theme = activeTheme;
+      themeText.textContent = `Theme: ${mode.charAt(0).toUpperCase() + mode.slice(1)}`;
+      button.setAttribute('aria-pressed', mode !== 'auto');
+    }
+
+    button.addEventListener('click', () => {
+      mode = modes[(modes.indexOf(mode) + 1) % modes.length];
+      localStorage.setItem('theme', mode);
+      applyTheme();
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (mode === 'auto') applyTheme();
+    });
+
+    applyTheme();
+  </script>
 </body>
 </html>
