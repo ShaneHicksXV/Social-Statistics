@@ -13,7 +13,9 @@
   --accent: #2563eb;
   --button-bg: #111827;
   --button-text: #ffffff;
-  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --hero-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --hero-text: #ffffff;
 }
 
 :root[data-theme="dark"] {
@@ -24,30 +26,38 @@
   --accent: #60a5fa;
   --button-bg: #e5e7eb;
   --button-text: #111827;
-  --shadow: 0 10px 30px rgba(0,0,0,0.3);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --hero-bg: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  --hero-text: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: background-color .25s ease, color .25s ease;
+  line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .container {
-  width: min(1100px, 92vw);
+  width: min(1200px, 92vw);
   margin: 0 auto;
 }
 
 .topbar {
-  border-bottom: 1px solid var(--border);
-  background: color-mix(in srgb, var(--card) 92%, transparent);
-  backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
 .topbar-inner {
@@ -61,9 +71,13 @@ body {
 .brand a {
   text-decoration: none;
   color: var(--text);
+  font-size: 1.4rem;
   font-weight: 800;
-  letter-spacing: .2px;
-  font-size: 1.2rem;
+  letter-spacing: 0.2px;
+}
+
+.brand a:hover {
+  color: var(--accent);
 }
 
 .theme-toggle {
@@ -77,8 +91,8 @@ body {
   color: var(--button-text);
   cursor: pointer;
   font: inherit;
-  font-weight: 600;
-  transition: transform .15s ease, opacity .15s ease, background-color .25s ease, color .25s ease;
+  font-weight: 700;
+  transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 .theme-toggle:hover {
@@ -90,35 +104,60 @@ body {
   outline-offset: 3px;
 }
 
+.theme-toggle i {
+  font-size: 1rem;
+}
+
 .hero-section {
   padding: 72px 0;
+  background: var(--hero-bg);
+  color: var(--hero-text);
 }
 
 .hero-card {
-  background: var(--card);
+  background: color-mix(in srgb, var(--card) 94%, transparent);
+  color: var(--text);
   border: 1px solid var(--border);
   border-radius: 24px;
   padding: 40px;
   box-shadow: var(--shadow);
 }
 
-h1 {
+.hero-card h1 {
   margin: 0 0 12px;
   font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--text);
 }
 
-p {
+.hero-card p {
   margin: 0 0 14px;
   line-height: 1.6;
   max-width: 65ch;
+  color: var(--text);
 }
-:root[data-theme="dark"] {
-  --bg: #0f172a;
-  --text: #e5e7eb;
-  --card: #111827;
-  --border: #334155;
-  --accent: #60a5fa;
-  --button-bg: #e5e7eb;
-  --button-text: #111827;
-  --shadow: 0 10px 30px rgba(0,0,0,0.3);
+
+@media (max-width: 768px) {
+  .topbar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 0;
+  }
+
+  .hero-section {
+    padding: 56px 0;
+  }
+
+  .hero-card {
+    padding: 28px;
+    border-radius: 18px;
+  }
+
+  .brand a {
+    font-size: 1.2rem;
+  }
+
+  .theme-toggle {
+    width: 100%;
+    justify-content: center;
+  }
 }
