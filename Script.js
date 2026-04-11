@@ -1,45 +1,26 @@
-// Mobile menu toggle
-function toggleMobileMenu() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        }
-    });
+const root = document.documentElement;
+const button = document.getElementById('theme-toggle');
+const themeText = document.getElementById('theme-text');
+const modes = ['auto', 'light', 'dark'];
+let mode = localStorage.getItem('theme') || 'auto';
+
+function systemTheme() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-// Active link highlighting
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            navLinks.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
+function applyTheme() {
+  const activeTheme = mode === 'auto' ? systemTheme() : mode;
+  root.dataset.theme = activeTheme;
+  themeText.textContent = `Theme: ${mode.charAt(0).toUpperCase() + mode.slice(1)}`;
+  button.setAttribute('aria-pressed', mode !== 'auto');
+}
+
+button.addEventListener('click', () => {
+  mode = modes[(modes.indexOf(mode) + 1) % modes.length];
+  localStorage.setItem('theme', mode);
+  applyTheme();
 });
 
-// Smooth scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-        // Close mobile menu after click
-        document.querySelector('.hamburger').classList.remove('active');
-        document.querySelector('.nav-menu').classList.remove('active');
-    });
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  if (mode === 'auto') applyTheme();
 });
