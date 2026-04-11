@@ -9,8 +9,11 @@
 <body>
   <header class="topbar">
     <div class="container topbar-inner">
-      <div class="brand">Social Statistics</div>
-      <button id="theme-toggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle theme">
+      <div class="brand">
+        <a href="#home">Social Statistics</a>
+      </div>
+
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
         <i class="fa-solid fa-circle-half-stroke"></i>
         <span id="theme-text">Theme: Auto</span>
       </button>
@@ -27,9 +30,6 @@
     </section>
   </main>
 
-  <button id="theme-toggle"></button>
-  <span id="theme-text"></span>
-
   <script>
     const root = document.documentElement;
     const button = document.getElementById('theme-toggle');
@@ -37,7 +37,9 @@
     const modes = ['auto', 'light', 'dark'];
     let mode = localStorage.getItem('theme') || 'auto';
 
-    const systemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    function systemTheme() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
 
     function applyTheme() {
       const activeTheme = mode === 'auto' ? systemTheme() : mode;
@@ -52,9 +54,16 @@
       applyTheme();
     });
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      if (mode === 'auto') applyTheme();
-    });
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', () => {
+        if (mode === 'auto') applyTheme();
+      });
+    } else {
+      mediaQuery.addListener(() => {
+        if (mode === 'auto') applyTheme();
+      });
+    }
 
     applyTheme();
   </script>
