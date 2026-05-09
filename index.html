@@ -1,3 +1,7 @@
+Here’s your combined HTML with the light theme text fix applied. I removed the transparent card backgrounds and made the cards use solid theme colors so the text stays readable in light mode and dark mode.
+
+xml
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -5,147 +9,353 @@
   <title>Social Statistics | Home</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
       color-scheme: light dark;
-      --bg: #f6f7fb; --text: #111827; --card: #ffffff; --border: #d1d5db;
-      --accent: #2563eb; --accent-2: #7c3aed; --button-bg: #111827; --button-text: #ffffff;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08); --hero-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --bg: #f6f7fb;
+      --text: #111827;
+      --card: #ffffff;
+      --border: #d1d5db;
+      --accent: #2563eb;
+      --accent-2: #7c3aed;
+      --button-bg: #111827;
+      --button-text: #ffffff;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --hero-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       --hero-text: #ffffff;
     }
+
     :root[data-theme="dark"] {
-      --bg: #0f172a; --text: #e5e7eb; --card: #111827; --border: #334155;
-      --accent: #60a5fa; --accent-2: #a78bfa; --button-bg: #e5e7eb; --button-text: #111827;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.3); --hero-bg: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      --bg: #0f172a;
+      --text: #e5e7eb;
+      --card: #111827;
+      --border: #334155;
+      --accent: #60a5fa;
+      --accent-2: #a78bfa;
+      --button-bg: #e5e7eb;
+      --button-text: #111827;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --hero-bg: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       --hero-text: #ffffff;
     }
-    body { min-height: 100vh; font-family: Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; transition: background-color 0.25s ease, color 0.25s ease; }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
     a { color: inherit; }
-    .container { width: min(1200px, 92vw); margin: 0 auto; }
-    .topbar { position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); background: color-mix(in srgb, var(--card) 92%, transparent); backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06); }
-    .topbar-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .brand a { text-decoration: none; color: var(--text); font-size: 1.4rem; font-weight: 800; }
-    .nav { display: flex; gap: 18px; flex-wrap: wrap; }
-    .nav a { text-decoration: none; color: var(--text); font-weight: 600; opacity: 0.85; }
-    .nav a:hover, .nav a.active { color: var(--accent); opacity: 1; }
-    .theme-toggle { border-radius: 999px; padding: 10px 16px; background: var(--button-bg); color: var(--button-text); cursor: pointer; font-weight: 700; }
-    .hero-section { padding: 72px 0; background: var(--hero-bg); color: var(--hero-text); }
-    .hero-card, .card, .tracker-card { background: color-mix(in srgb, var(--card) 94%, transparent); border: 1px solid var(--border); border-radius: 24px; padding: 40px; box-shadow: var(--shadow); }
-    .section { padding: 28px 0 56px; }
-    .section-title { font-size: 1.8rem; margin-bottom: 14px; }
-    .section-copy { max-width: 75ch; margin-bottom: 22px; opacity: 0.92; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
-    .highlight { color: var(--accent); font-weight: 700; }
-    .stats-list { display: grid; gap: 12px; margin-top: 14px; }
-    .stats-item { padding: 14px 16px; border-radius: 14px; background: color-mix(in srgb, var(--card) 82%, var(--accent) 18%); border: 1px solid var(--border); }
-    .footer { padding: 28px 0 42px; border-top: 1px solid var(--border); margin-top: 20px; opacity: 0.85; }
+
+    .container {
+      width: min(1200px, 92vw);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .topbar-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .brand a:hover { color: var(--accent); }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      opacity: 0.85;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--accent);
+      opacity: 1;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: var(--button-bg);
+      color: var(--button-text);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      transition: transform 0.15s ease, background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .theme-toggle:hover { transform: translateY(-1px); }
+
+    .theme-toggle:focus-visible,
+    .goal-input:focus-visible,
+    .save-goal:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .hero-section {
+      padding: 72px 0;
+      background: var(--hero-bg);
+      color: var(--hero-text);
+    }
+
+    .hero-card,
+    .card,
+    .tracker-card {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      background: var(--card);
+      color: var(--text);
+    }
+
+    :root[data-theme="dark"] .hero-card {
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .hero-card h1 {
+      margin-bottom: 12px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    .hero-card p {
+      max-width: 70ch;
+      margin-bottom: 14px;
+    }
+
+    .section {
+      padding: 28px 0 56px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+
+    .section-copy {
+      max-width: 75ch;
+      margin-bottom: 22px;
+      opacity: 0.92;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      opacity: 0.92;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .stats-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .stats-item {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .footer {
+      padding: 28px 0 42px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 900px) {
+      .tracker-wrap { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .hero-section { padding: 42px 0; }
+      .hero-card { padding: 24px; }
+      .nav { gap: 12px; }
+      .tracker-card { padding: 22px; }
+    }
   </style>
 </head>
 <body>
-
-<header class="topbar">
-  <div class="container topbar-inner">
-    <div class="brand"><a href="index.html">Social Statistics</a></div>
-    <nav class="nav">
-      <a class="active" href="index.html">Home</a>
-      <a href="impact.html">Impact</a>
-      <a href="habits.html">Habits</a>
-      <a href="tracker.html">Tracker</a>
-      <a href="facts.html">Facts</a>
-    </nav>
-    <button id="theme-toggle" class="theme-toggle">Theme</button>
-  </div>
-</header>
-
-<main>
-
-<section class="hero-section">
-  <div class="container hero-card">
-    <h1>Social Statistics</h1>
-    <p>A website about the effects of social media and healthier digital habits.</p>
-    <p>Social platforms shape how people communicate, learn, and spend time online.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">Why Social Media Matters</h2>
-    <p class="section-copy">
-      Social media influences how people think, interact, and spend their time.
-    </p>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Global Reach</h3>
-        <p><span class="highlight">4.8+ billion</span> users worldwide.</p>
-      </div>
-      <div class="card">
-        <h3>Daily Usage</h3>
-        <p><span class="highlight">2–3 hours</span> per day on average.</p>
-      </div>
-      <div class="card">
-        <h3>Youth Activity</h3>
-        <p>Young people check apps frequently throughout the day.</p>
-      </div>
-      <div class="card">
-        <h3>News Source</h3>
-        <p>Many rely on social media for news.</p>
-      </div>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand"><a href="index.html">Social Statistics</a></div>
+      <nav class="nav" aria-label="Primary">
+        <a class="active" href="index.html">Home</a>
+        <a href="impact.html">Impact</a>
+        <a href="habits.html">Habits</a>
+        <a href="tracker.html">Tracker</a>
+        <a href="facts.html">Facts</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+        <span id="theme-text">Theme: Auto</span>
+      </button>
     </div>
-  </div>
-</section>
+  </header>
 
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">Key Effects</h2>
+  <main>
+    <section class="hero-section">
+      <div class="container hero-card">
+        <h1>Social Statistics</h1>
+        <p>A website about the effects of social media and healthier digital habits.</p>
+        <p>Social platforms shape how people communicate, learn, and spend time online. This site explores those effects and suggests better ways to manage them.</p>
+        <p>Updated on April 15, 2026 for a first deployment presentation.</p>
+      </div>
+    </section>
 
-    <div class="stats-list">
-      <div class="stats-item">Positive: Connects people globally.</div>
-      <div class="stats-item">Positive: Access to information.</div>
-      <div class="stats-item">Negative: Mental health concerns.</div>
-      <div class="stats-item">Negative: Increased screen time.</div>
-    </div>
-  </div>
-</section>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Why Social Media Matters</h2>
+        <p class="section-copy">
+          Social media influences how people think, interact, and spend their time. While it connects billions worldwide, it also affects mental health, attention span, and daily habits in powerful ways.
+        </p>
 
-<section class="section">
-  <div class="container tracker-card">
-    <h2 class="section-title">Take Control</h2>
-    <p>Track your habits and build healthier digital routines.</p>
-    <a href="tracker.html" class="stats-item" style="display:inline-block; margin-top:10px; text-decoration:none;">
-      Go to Tracker
-    </a>
-  </div>
-</section>
+        <div class="grid">
+          <div class="card">
+            <h3>Global Reach</h3>
+            <p>Over <span class="highlight">4.8 billion people</span> use social media worldwide, making it one of the most influential tools in modern life.</p>
+          </div>
+          <div class="card">
+            <h3>Daily Usage</h3>
+            <p>The average person spends about <span class="highlight">2–3 hours per day</span> on social platforms.</p>
+          </div>
+          <div class="card">
+            <h3>Youth Engagement</h3>
+            <p>Teenagers and young adults are the most active users, often checking apps multiple times per hour.</p>
+          </div>
+          <div class="card">
+            <h3>Information Source</h3>
+            <p>Many people now get their news primarily from social media instead of traditional outlets.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</main>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Key Effects</h2>
+        <p class="section-copy">
+          Social media has both positive and negative impacts depending on how it is used.
+        </p>
 
-<footer class="footer">
-  <div class="container">
-    <p>Social Statistics — A better way to connect.</p>
-  </div>
-</footer>
+        <div class="stats-list">
+          <div class="stats-item">Positive: Helps people stay connected across long distances and build communities.</div>
+          <div class="stats-item">Positive: Provides access to education, news, and diverse perspectives.</div>
+          <div class="stats-item">Negative: Can contribute to anxiety, depression, and low self-esteem.</div>
+          <div class="stats-item">Negative: Encourages excessive screen time and reduced real-world interaction.</div>
+        </div>
+      </div>
+    </section>
 
-<script>
-const root = document.documentElement;
-const button = document.getElementById('theme-toggle');
-let mode = localStorage.getItem('theme') || 'auto';
+    <section class="section">
+      <div class="container tracker-card">
+        <h2 class="section-title">Take Control of Your Habits</h2>
+        <p class="section-copy">
+          Understanding your usage is the first step toward healthier habits. Set goals, track your time, and build a better relationship with technology.
+        </p>
+        <a href="tracker.html" class="theme-toggle" style="display:inline-flex; text-decoration:none;">
+          Start Tracking
+        </a>
+      </div>
+    </section>
+  </main>
 
-function systemTheme() {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
+  <footer class="footer">
+    <div class="container"><p>Social Statistics — A better way to connect.</p></div>
+  </footer>
 
-function applyTheme() {
-  root.dataset.theme = mode === 'auto' ? systemTheme() : mode;
-}
+  <script>
+    const root = document.documentElement;
+    const button = document.getElementById('theme-toggle');
+    const themeText = document.getElementById('theme-text');
+    const modes = ['auto', 'light', 'dark'];
+    let mode = localStorage.getItem('theme') || 'auto';
 
-button.onclick = () => {
-  mode = mode === 'dark' ? 'light' : 'dark';
-  localStorage.setItem('theme', mode);
-  applyTheme();
-};
+    function systemTheme() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
 
-applyTheme();
-</script>
+    function applyTheme() {
+      const activeTheme = mode === 'auto' ? systemTheme() : mode;
+      root.dataset.theme = activeTheme;
+      themeText.textContent = `Theme: ${mode.charAt(0).toUpperCase() + mode.slice(1)}`;
+      button.setAttribute('aria-pressed', mode !== 'auto');
+    }
 
+    button.addEventListener('click', () => {
+      mode = modes[(modes.indexOf(mode) + 1) % modes.length];
+      localStorage.setItem('theme', mode);
+      applyTheme();
+    });
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => { if (mode === 'auto') applyTheme(); };
+    if (mediaQuery.addEventListener) mediaQuery.addEventListener('change', handleChange);
+    else mediaQuery.addListener(handleChange);
+
+    applyTheme();
+  </script>
 </body>
 </html>
